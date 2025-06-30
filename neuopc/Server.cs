@@ -43,11 +43,11 @@ namespace neuopc
             }
         }
 
-        public static void Start(string uri, string user, string password, ValueWrite write)
+        public static void Start(string uri, string user, string password, ValueWrite write, ServerConfig cfg)
         {
             if (_server == null)
             {
-                _server = new UaServer(uri, user, password, write);
+                _server = new UaServer(uri, user, password, write, cfg);
                 _server.Start();
             }
         }

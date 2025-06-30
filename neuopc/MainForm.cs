@@ -21,6 +21,38 @@ namespace neuopc
 
             _running = true;
             LogTaskRun();
+            UAMessageMode.DrawItem += (sender, e) =>
+            {
+                if (e.Index < 0 || e.Index >= UAMessageMode.Items.Count)
+                {
+                    return;
+                }
+                e.DrawBackground();
+                var text = UAMessageMode.Items[e.Index].ToString();
+                var isDisable = false;
+                if (UASecurityPolicy.Text == "None")
+                {
+                    if (text != "None")
+                    {
+                        isDisable = true;
+                    }
+                }
+                else
+                {
+                    if (text == "None")
+                    {
+                        isDisable = true;
+                    }
+                }
+                e.Graphics.DrawString(
+                    text,
+                    e.Font,
+                    isDisable ? Brushes.Gray : Brushes.Black,
+                    e.Bounds
+                );
+
+                e.DrawFocusRectangle();
+            };
         }
 
         private void LogTaskRun()
@@ -266,46 +298,71 @@ namespace neuopc
 
         private void SwitchButton_Click(object sender, EventArgs e)
         {
-            SwitchButton.Enabled = false;
-
-            if (SwitchButton.Text.Equals("Start"))
+            try
             {
-                var url = UAUrlTextBox.Text;
-                var user = UAUserTextBox.Text;
-                var password = UAPasswordTextBox.Text;
-                Server.Start(url, user, password, Client.WriteTag);
+                SwitchButton.Enabled = false;
 
-                var uri = DAServerComboBox.Text;
-                Client.Start(uri, Server.DataChannel);
+                if (SwitchButton.Text.Equals("Start"))
+                {
+                    var url = UAUrlTextBox.Text;
+                    var user = UAUserTextBox.Text;
+                    var password = UAPasswordTextBox.Text;
+                    Server.Start(url, user, password, Client.WriteTag, new neuserver.ServerConfig
+                    {
+                        IsAllowAnonymous = UAIsAllowAnonymous.Checked,
+                        SecurityMode = UAMessageMode.Text,
+                        SecurityPolicy = UASecurityPolicy.Text
+                    });
 
-                SwitchButton.Text = "Stop";
-                DAHostComboBox.Enabled = false;
-                DAServerComboBox.Enabled = false;
-                TestButton.Enabled = false;
-                UAUrlTextBox.Enabled = false;
-                UAUserTextBox.Enabled = false;
-                UAPasswordTextBox.Enabled = false;
+                    var uri = DAServerComboBox.Text;
+                    Client.Start(uri, Server.DataChannel);
 
-                Log.Information($"da server {uri} started");
+                    SwitchButton.Text = "Stop";
+                    DAHostComboBox.Enabled = false;
+                    DAServerComboBox.Enabled = false;
+                    TestButton.Enabled = false;
+                    UAUrlTextBox.Enabled = false;
+                    UAUserTextBox.Enabled = false;
+                    UAPasswordTextBox.Enabled = false;
+                    UAIsAllowAnonymous.Enabled = false;
+                    UASecurityPolicy.Enabled = false;
+                    UAMessageMode.Enabled = false;
+
+                    Log.Information($"da server {uri} started");
+                }
+                else
+                {
+                    Client.Stop();
+                    Server.Stop();
+
+                    SwitchButton.Text = "Start";
+                    DAHostComboBox.Enabled = true;
+                    DAServerComboBox.Enabled = true;
+                    TestButton.Enabled = true;
+                    UAUrlTextBox.Enabled = true;
+                    UAUserTextBox.Enabled = true;
+                    UAPasswordTextBox.Enabled = true;
+                    UAIsAllowAnonymous.Enabled = true;
+                    UASecurityPolicy.Enabled = true;
+                    UAMessageMode.Enabled = true;
+
+                    var uri = DAServerComboBox.Text;
+                    Log.Information($"da server {uri} server stopped");
+                }
+
+                SwitchButton.Enabled = true;
             }
-            else
+            catch (Exception ex)
             {
-                Client.Stop();
-                Server.Stop();
-
-                SwitchButton.Text = "Start";
-                DAHostComboBox.Enabled = true;
-                DAServerComboBox.Enabled = true;
-                TestButton.Enabled = true;
-                UAUrlTextBox.Enabled = true;
-                UAUserTextBox.Enabled = true;
-                UAPasswordTextBox.Enabled = true;
-
-                var uri = DAServerComboBox.Text;
-                Log.Information($"da server {uri} server stopped");
+                Log.Error(ex, "switch server error");
+                SwitchButton.Enabled = true;
+                MessageBox.Show(
+                    "Switch server failed, please check the log for details.",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
-
-            SwitchButton.Enabled = true;
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
@@ -435,5 +492,35 @@ namespace neuopc
         }
 
         private void MainListView_SelectedIndexChanged(object sender, EventArgs e) { }
+
+        private void UASecurityPolicy_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (UASecurityPolicy.Text == "None")
+            {
+                UAMessageMode.Text = "None";
+            }
+            else
+            {
+                UAMessageMode.Text = "Sign & Encrypt";
+            }
+        }
+
+        private void UAMessageMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (UASecurityPolicy.Text == "None")
+            {
+                if (UAMessageMode.Text != "None")
+                {
+                    UAMessageMode.Text = "None";
+                }
+            }
+            else
+            {
+                if (UAMessageMode.Text == "None")
+                {
+                    UAMessageMode.Text = "Sign & Encrypt";
+                }
+            }
+        }
     }
 }

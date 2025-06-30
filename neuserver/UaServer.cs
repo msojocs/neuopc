@@ -18,7 +18,7 @@ namespace neuserver
 
         private readonly Task _task;
 
-        public UaServer(string uri, string user, string password, ValueWrite write)
+        public UaServer(string uri, string user, string password, ValueWrite write, ServerConfig cfg)
         {
             _user = user;
             _password = password;
@@ -32,6 +32,13 @@ namespace neuserver
                 new UserTokenPolicy(UserTokenType.UserName),
                 new UserTokenPolicy(UserTokenType.Certificate)
             };
+            if (cfg.IsAllowAnonymous)
+            {
+                tokenPolicies.Add(new UserTokenPolicy(UserTokenType.Anonymous)
+                {
+                    PolicyId = UserTokenType.Anonymous.ToString(),
+                });
+            }
 
             var serverConfiguration = new ServerConfiguration()
             {
@@ -40,8 +47,28 @@ namespace neuserver
                 MaxRequestThreadCount = 100,
                 MaxQueuedRequestCount = 200,
                 UserTokenPolicies = new UserTokenPolicyCollection(tokenPolicies),
+                SecurityPolicies = new ServerSecurityPolicyCollection(new List<ServerSecurityPolicy>
+                {
+                    new ServerSecurityPolicy()
+                    {
+                        SecurityMode = cfg.SecurityMode switch
+                        {
+                            "None" => MessageSecurityMode.None,
+                            "Sign" => MessageSecurityMode.Sign,
+                            "Sign & Encrypt" => MessageSecurityMode.SignAndEncrypt,
+                            _ => throw new NotImplementedException(),
+                        },
+                        SecurityPolicyUri = cfg.SecurityPolicy switch
+                        {
+                            "None" => SecurityPolicies.None,
+                            "Basic256" => SecurityPolicies.Basic256,
+                            "Basic256Sha256" => SecurityPolicies.Basic256Sha256,
+                            _ => throw new NotImplementedException(),
+                        }
+                    }
+                })
             };
-
+            
             var securityConfiguration = new SecurityConfiguration
             {
                 ApplicationCertificate = new CertificateIdentifier

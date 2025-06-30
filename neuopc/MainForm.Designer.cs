@@ -54,6 +54,11 @@ namespace neuopc
             deleteTagToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             TabPageSetting = new System.Windows.Forms.TabPage();
             groupBox1 = new System.Windows.Forms.GroupBox();
+            label9 = new System.Windows.Forms.Label();
+            label8 = new System.Windows.Forms.Label();
+            UAMessageMode = new System.Windows.Forms.ComboBox();
+            UASecurityPolicy = new System.Windows.Forms.ComboBox();
+            UAIsAllowAnonymous = new System.Windows.Forms.CheckBox();
             label14 = new System.Windows.Forms.Label();
             label7 = new System.Windows.Forms.Label();
             label6 = new System.Windows.Forms.Label();
@@ -87,22 +92,22 @@ namespace neuopc
             // 
             statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { DAStatusLabel, UAStatusLabel });
-            statusStrip1.Location = new System.Drawing.Point(0, 672);
+            statusStrip1.Location = new System.Drawing.Point(0, 788);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 17, 0);
-            statusStrip1.Size = new System.Drawing.Size(1128, 22);
+            statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 20, 0);
+            statusStrip1.Size = new System.Drawing.Size(1333, 22);
             statusStrip1.TabIndex = 4;
             statusStrip1.Text = "statusStrip1";
             // 
             // DAStatusLabel
             // 
             DAStatusLabel.Name = "DAStatusLabel";
-            DAStatusLabel.Size = new System.Drawing.Size(0, 15);
+            DAStatusLabel.Size = new System.Drawing.Size(0, 13);
             // 
             // UAStatusLabel
             // 
             UAStatusLabel.Name = "UAStatusLabel";
-            UAStatusLabel.Size = new System.Drawing.Size(0, 15);
+            UAStatusLabel.Size = new System.Drawing.Size(0, 13);
             // 
             // NotifyIcon
             // 
@@ -114,9 +119,10 @@ namespace neuopc
             // 
             TabPageAbout.Controls.Add(AboutRichTextBox);
             TabPageAbout.Location = new System.Drawing.Point(4, 36);
+            TabPageAbout.Margin = new System.Windows.Forms.Padding(4);
             TabPageAbout.Name = "TabPageAbout";
-            TabPageAbout.Padding = new System.Windows.Forms.Padding(3);
-            TabPageAbout.Size = new System.Drawing.Size(1120, 632);
+            TabPageAbout.Padding = new System.Windows.Forms.Padding(4);
+            TabPageAbout.Size = new System.Drawing.Size(1325, 748);
             TabPageAbout.TabIndex = 2;
             TabPageAbout.Text = "About";
             TabPageAbout.UseVisualStyleBackColor = true;
@@ -124,10 +130,11 @@ namespace neuopc
             // AboutRichTextBox
             // 
             AboutRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            AboutRichTextBox.Location = new System.Drawing.Point(3, 3);
+            AboutRichTextBox.Location = new System.Drawing.Point(4, 4);
+            AboutRichTextBox.Margin = new System.Windows.Forms.Padding(4);
             AboutRichTextBox.Name = "AboutRichTextBox";
             AboutRichTextBox.ReadOnly = true;
-            AboutRichTextBox.Size = new System.Drawing.Size(1114, 626);
+            AboutRichTextBox.Size = new System.Drawing.Size(1317, 740);
             AboutRichTextBox.TabIndex = 0;
             AboutRichTextBox.Text = "";
             // 
@@ -135,8 +142,9 @@ namespace neuopc
             // 
             TabPageLog.Controls.Add(LogRichTextBox);
             TabPageLog.Location = new System.Drawing.Point(4, 36);
+            TabPageLog.Margin = new System.Windows.Forms.Padding(4);
             TabPageLog.Name = "TabPageLog";
-            TabPageLog.Size = new System.Drawing.Size(1120, 632);
+            TabPageLog.Size = new System.Drawing.Size(1325, 748);
             TabPageLog.TabIndex = 3;
             TabPageLog.Text = "Log";
             TabPageLog.UseVisualStyleBackColor = true;
@@ -145,9 +153,10 @@ namespace neuopc
             // 
             LogRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             LogRichTextBox.Location = new System.Drawing.Point(0, 0);
+            LogRichTextBox.Margin = new System.Windows.Forms.Padding(4);
             LogRichTextBox.Name = "LogRichTextBox";
             LogRichTextBox.ReadOnly = true;
-            LogRichTextBox.Size = new System.Drawing.Size(1120, 632);
+            LogRichTextBox.Size = new System.Drawing.Size(1325, 748);
             LogRichTextBox.TabIndex = 0;
             LogRichTextBox.Text = "";
             // 
@@ -155,9 +164,10 @@ namespace neuopc
             // 
             TabPageData.Controls.Add(MainListView);
             TabPageData.Location = new System.Drawing.Point(4, 36);
+            TabPageData.Margin = new System.Windows.Forms.Padding(4);
             TabPageData.Name = "TabPageData";
-            TabPageData.Padding = new System.Windows.Forms.Padding(3);
-            TabPageData.Size = new System.Drawing.Size(1120, 632);
+            TabPageData.Padding = new System.Windows.Forms.Padding(4);
+            TabPageData.Size = new System.Drawing.Size(1325, 748);
             TabPageData.TabIndex = 1;
             TabPageData.Text = "Tags";
             TabPageData.UseVisualStyleBackColor = true;
@@ -166,9 +176,10 @@ namespace neuopc
             // 
             MainListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { name, type, rights, value, quality, error, timestamp, handle });
             MainListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            MainListView.Location = new System.Drawing.Point(3, 3);
+            MainListView.Location = new System.Drawing.Point(4, 4);
+            MainListView.Margin = new System.Windows.Forms.Padding(4);
             MainListView.Name = "MainListView";
-            MainListView.Size = new System.Drawing.Size(1114, 626);
+            MainListView.Size = new System.Drawing.Size(1317, 740);
             MainListView.TabIndex = 7;
             MainListView.UseCompatibleStateImageBehavior = false;
             MainListView.View = System.Windows.Forms.View.Details;
@@ -220,33 +231,34 @@ namespace neuopc
             TagContextMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             TagContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { addTagToolStripMenuItem, toolStripSeparator2, deleteTagToolStripMenuItem });
             TagContextMenuStrip.Name = "contextMenuStrip1";
-            TagContextMenuStrip.Size = new System.Drawing.Size(174, 70);
+            TagContextMenuStrip.Size = new System.Drawing.Size(194, 78);
             // 
             // addTagToolStripMenuItem
             // 
             addTagToolStripMenuItem.Name = "addTagToolStripMenuItem";
-            addTagToolStripMenuItem.Size = new System.Drawing.Size(173, 30);
+            addTagToolStripMenuItem.Size = new System.Drawing.Size(193, 34);
             addTagToolStripMenuItem.Text = "Add Tag";
             addTagToolStripMenuItem.Click += addTagToolStripMenuItem_Click;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new System.Drawing.Size(170, 6);
+            toolStripSeparator2.Size = new System.Drawing.Size(190, 6);
             // 
             // deleteTagToolStripMenuItem
             // 
             deleteTagToolStripMenuItem.Name = "deleteTagToolStripMenuItem";
-            deleteTagToolStripMenuItem.Size = new System.Drawing.Size(173, 30);
+            deleteTagToolStripMenuItem.Size = new System.Drawing.Size(193, 34);
             deleteTagToolStripMenuItem.Text = "Delete Tag";
             // 
             // TabPageSetting
             // 
             TabPageSetting.Controls.Add(groupBox1);
             TabPageSetting.Location = new System.Drawing.Point(4, 36);
+            TabPageSetting.Margin = new System.Windows.Forms.Padding(4);
             TabPageSetting.Name = "TabPageSetting";
-            TabPageSetting.Padding = new System.Windows.Forms.Padding(3);
-            TabPageSetting.Size = new System.Drawing.Size(1120, 632);
+            TabPageSetting.Padding = new System.Windows.Forms.Padding(4);
+            TabPageSetting.Size = new System.Drawing.Size(1325, 748);
             TabPageSetting.TabIndex = 0;
             TabPageSetting.Text = "Setting";
             TabPageSetting.UseVisualStyleBackColor = true;
@@ -254,6 +266,11 @@ namespace neuopc
             // groupBox1
             // 
             groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            groupBox1.Controls.Add(label9);
+            groupBox1.Controls.Add(label8);
+            groupBox1.Controls.Add(UAMessageMode);
+            groupBox1.Controls.Add(UASecurityPolicy);
+            groupBox1.Controls.Add(UAIsAllowAnonymous);
             groupBox1.Controls.Add(label14);
             groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(label6);
@@ -272,21 +289,73 @@ namespace neuopc
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(TestButton);
-            groupBox1.Location = new System.Drawing.Point(9, 7);
-            groupBox1.Margin = new System.Windows.Forms.Padding(4);
+            groupBox1.Location = new System.Drawing.Point(11, 8);
+            groupBox1.Margin = new System.Windows.Forms.Padding(5);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            groupBox1.Size = new System.Drawing.Size(1107, 618);
+            groupBox1.Padding = new System.Windows.Forms.Padding(5);
+            groupBox1.Size = new System.Drawing.Size(1308, 725);
             groupBox1.TabIndex = 6;
             groupBox1.TabStop = false;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new System.Drawing.Point(464, 453);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(167, 28);
+            label9.TabIndex = 52;
+            label9.Text = "Message Mode";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new System.Drawing.Point(472, 398);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(159, 28);
+            label8.TabIndex = 51;
+            label8.Text = "Security Policy";
+            // 
+            // UAMessageMode
+            // 
+            UAMessageMode.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            UAMessageMode.FormattingEnabled = true;
+            UAMessageMode.Items.AddRange(new object[] { "None", "Sign", "Sign & Encrypt" });
+            UAMessageMode.Location = new System.Drawing.Point(643, 450);
+            UAMessageMode.Name = "UAMessageMode";
+            UAMessageMode.Size = new System.Drawing.Size(212, 35);
+            UAMessageMode.TabIndex = 50;
+            UAMessageMode.Text = "None";
+            UAMessageMode.SelectedIndexChanged += UAMessageMode_SelectedIndexChanged;
+            // 
+            // UASecurityPolicy
+            // 
+            UASecurityPolicy.FormattingEnabled = true;
+            UASecurityPolicy.Items.AddRange(new object[] { "None", "Basic256", "Basic256Sha256" });
+            UASecurityPolicy.Location = new System.Drawing.Point(644, 395);
+            UASecurityPolicy.Name = "UASecurityPolicy";
+            UASecurityPolicy.Size = new System.Drawing.Size(212, 36);
+            UASecurityPolicy.TabIndex = 49;
+            UASecurityPolicy.Text = "None";
+            UASecurityPolicy.SelectedIndexChanged += UASecurityPolicy_SelectedIndexChanged;
+            // 
+            // UAIsAllowAnonymous
+            // 
+            UAIsAllowAnonymous.AutoSize = true;
+            UAIsAllowAnonymous.Location = new System.Drawing.Point(237, 349);
+            UAIsAllowAnonymous.Name = "UAIsAllowAnonymous";
+            UAIsAllowAnonymous.Size = new System.Drawing.Size(222, 32);
+            UAIsAllowAnonymous.TabIndex = 48;
+            UAIsAllowAnonymous.Text = "Allow Anonymous";
+            UAIsAllowAnonymous.UseVisualStyleBackColor = true;
             // 
             // label14
             // 
             label14.AutoSize = true;
             label14.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            label14.Location = new System.Drawing.Point(730, 245);
+            label14.Location = new System.Drawing.Point(863, 286);
+            label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label14.Name = "label14";
-            label14.Size = new System.Drawing.Size(18, 24);
+            label14.Size = new System.Drawing.Size(22, 28);
             label14.TabIndex = 47;
             label14.Text = "*";
             // 
@@ -294,9 +363,10 @@ namespace neuopc
             // 
             label7.AutoSize = true;
             label7.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            label7.Location = new System.Drawing.Point(730, 97);
+            label7.Location = new System.Drawing.Point(863, 113);
+            label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label7.Name = "label7";
-            label7.Size = new System.Drawing.Size(18, 24);
+            label7.Size = new System.Drawing.Size(22, 28);
             label7.TabIndex = 37;
             label7.Text = "*";
             // 
@@ -304,17 +374,19 @@ namespace neuopc
             // 
             label6.AutoSize = true;
             label6.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            label6.Location = new System.Drawing.Point(730, 55);
+            label6.Location = new System.Drawing.Point(863, 64);
+            label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(18, 24);
+            label6.Size = new System.Drawing.Size(22, 28);
             label6.TabIndex = 36;
             label6.Text = "*";
             // 
             // SaveButton
             // 
-            SaveButton.Location = new System.Drawing.Point(564, 437);
+            SaveButton.Location = new System.Drawing.Point(667, 510);
+            SaveButton.Margin = new System.Windows.Forms.Padding(4);
             SaveButton.Name = "SaveButton";
-            SaveButton.Size = new System.Drawing.Size(160, 34);
+            SaveButton.Size = new System.Drawing.Size(189, 40);
             SaveButton.TabIndex = 35;
             SaveButton.Text = "Save";
             SaveButton.UseVisualStyleBackColor = true;
@@ -323,26 +395,29 @@ namespace neuopc
             // DALabel
             // 
             DALabel.AutoSize = true;
-            DALabel.Location = new System.Drawing.Point(226, 136);
+            DALabel.Location = new System.Drawing.Point(267, 159);
+            DALabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             DALabel.Name = "DALabel";
-            DALabel.Size = new System.Drawing.Size(0, 24);
+            DALabel.Size = new System.Drawing.Size(0, 28);
             DALabel.TabIndex = 34;
             // 
             // CheckBox
             // 
             CheckBox.AutoSize = true;
-            CheckBox.Location = new System.Drawing.Point(209, 441);
+            CheckBox.Location = new System.Drawing.Point(247, 514);
+            CheckBox.Margin = new System.Windows.Forms.Padding(4);
             CheckBox.Name = "CheckBox";
-            CheckBox.Size = new System.Drawing.Size(178, 28);
+            CheckBox.Size = new System.Drawing.Size(206, 32);
             CheckBox.TabIndex = 33;
             CheckBox.Text = "Auto connection";
             CheckBox.UseVisualStyleBackColor = true;
             // 
             // SwitchButton
             // 
-            SwitchButton.Location = new System.Drawing.Point(393, 437);
+            SwitchButton.Location = new System.Drawing.Point(464, 510);
+            SwitchButton.Margin = new System.Windows.Forms.Padding(4);
             SwitchButton.Name = "SwitchButton";
-            SwitchButton.Size = new System.Drawing.Size(160, 34);
+            SwitchButton.Size = new System.Drawing.Size(189, 40);
             SwitchButton.TabIndex = 32;
             SwitchButton.Text = "Start";
             SwitchButton.UseVisualStyleBackColor = true;
@@ -350,98 +425,104 @@ namespace neuopc
             // 
             // UAPasswordTextBox
             // 
-            UAPasswordTextBox.Location = new System.Drawing.Point(226, 327);
+            UAPasswordTextBox.Location = new System.Drawing.Point(263, 447);
+            UAPasswordTextBox.Margin = new System.Windows.Forms.Padding(4);
             UAPasswordTextBox.Name = "UAPasswordTextBox";
-            UAPasswordTextBox.Size = new System.Drawing.Size(498, 30);
+            UAPasswordTextBox.Size = new System.Drawing.Size(157, 34);
             UAPasswordTextBox.TabIndex = 29;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(54, 330);
+            label5.Location = new System.Drawing.Point(60, 450);
+            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(165, 24);
+            label5.Size = new System.Drawing.Size(195, 28);
             label5.TabIndex = 30;
             label5.Text = "OPC UA Password";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(56, 248);
-            label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label3.Location = new System.Drawing.Point(66, 289);
+            label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(163, 24);
+            label3.Size = new System.Drawing.Size(190, 28);
             label3.TabIndex = 27;
             label3.Text = "OPC UA Endpoint";
             // 
             // UAUrlTextBox
             // 
-            UAUrlTextBox.Location = new System.Drawing.Point(226, 245);
+            UAUrlTextBox.Location = new System.Drawing.Point(267, 286);
             UAUrlTextBox.Margin = new System.Windows.Forms.Padding(2);
             UAUrlTextBox.Name = "UAUrlTextBox";
-            UAUrlTextBox.Size = new System.Drawing.Size(498, 30);
+            UAUrlTextBox.Size = new System.Drawing.Size(588, 34);
             UAUrlTextBox.TabIndex = 25;
             // 
             // UAUserTextBox
             // 
-            UAUserTextBox.Location = new System.Drawing.Point(226, 287);
+            UAUserTextBox.Location = new System.Drawing.Point(263, 400);
+            UAUserTextBox.Margin = new System.Windows.Forms.Padding(4);
             UAUserTextBox.Name = "UAUserTextBox";
-            UAUserTextBox.Size = new System.Drawing.Size(498, 30);
+            UAUserTextBox.Size = new System.Drawing.Size(157, 34);
             UAUserTextBox.TabIndex = 26;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(97, 290);
+            label4.Location = new System.Drawing.Point(111, 403);
+            label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(122, 24);
+            label4.Size = new System.Drawing.Size(145, 28);
             label4.TabIndex = 28;
             label4.Text = "OPC UA User";
             // 
             // DAHostComboBox
             // 
             DAHostComboBox.FormattingEnabled = true;
-            DAHostComboBox.Location = new System.Drawing.Point(226, 52);
+            DAHostComboBox.Location = new System.Drawing.Point(267, 61);
+            DAHostComboBox.Margin = new System.Windows.Forms.Padding(4);
             DAHostComboBox.Name = "DAHostComboBox";
-            DAHostComboBox.Size = new System.Drawing.Size(498, 32);
+            DAHostComboBox.Size = new System.Drawing.Size(588, 36);
             DAHostComboBox.TabIndex = 0;
             DAHostComboBox.DropDown += DAHostComboBox_DropDown;
             // 
             // DAServerComboBox
             // 
             DAServerComboBox.FormattingEnabled = true;
-            DAServerComboBox.Location = new System.Drawing.Point(226, 94);
+            DAServerComboBox.Location = new System.Drawing.Point(267, 110);
+            DAServerComboBox.Margin = new System.Windows.Forms.Padding(4);
             DAServerComboBox.Name = "DAServerComboBox";
-            DAServerComboBox.Size = new System.Drawing.Size(498, 32);
+            DAServerComboBox.Size = new System.Drawing.Size(588, 36);
             DAServerComboBox.TabIndex = 1;
             DAServerComboBox.DropDown += DAServerComboBox_DropDown;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(81, 97);
-            label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label2.Location = new System.Drawing.Point(96, 113);
+            label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(138, 24);
+            label2.Size = new System.Drawing.Size(162, 28);
             label2.TabIndex = 6;
             label2.Text = "OPC DA Server";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(94, 56);
-            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label1.Location = new System.Drawing.Point(111, 65);
+            label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(125, 24);
+            label1.Size = new System.Drawing.Size(146, 28);
             label1.TabIndex = 3;
             label1.Text = "OPC DA Host";
             // 
             // TestButton
             // 
-            TestButton.Location = new System.Drawing.Point(564, 136);
+            TestButton.Location = new System.Drawing.Point(667, 159);
             TestButton.Margin = new System.Windows.Forms.Padding(2);
             TestButton.Name = "TestButton";
-            TestButton.Size = new System.Drawing.Size(160, 34);
+            TestButton.Size = new System.Drawing.Size(189, 40);
             TestButton.TabIndex = 2;
             TestButton.Text = "Connection Test";
             TestButton.UseVisualStyleBackColor = true;
@@ -458,17 +539,18 @@ namespace neuopc
             TabControl.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             TabControl.ItemSize = new System.Drawing.Size(74, 32);
             TabControl.Location = new System.Drawing.Point(0, 0);
+            TabControl.Margin = new System.Windows.Forms.Padding(4);
             TabControl.Name = "TabControl";
             TabControl.SelectedIndex = 0;
-            TabControl.Size = new System.Drawing.Size(1128, 672);
+            TabControl.Size = new System.Drawing.Size(1333, 788);
             TabControl.TabIndex = 8;
             TabControl.SelectedIndexChanged += TabControl_SelectedIndexChanged;
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            AutoScaleDimensions = new System.Drawing.SizeF(13F, 28F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1128, 694);
+            ClientSize = new System.Drawing.Size(1333, 810);
             Controls.Add(TabControl);
             Controls.Add(statusStrip1);
             Margin = new System.Windows.Forms.Padding(2);
@@ -537,6 +619,11 @@ namespace neuopc
         private System.Windows.Forms.ToolStripMenuItem deleteTagToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.CheckBox UAIsAllowAnonymous;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox UAMessageMode;
+        private System.Windows.Forms.ComboBox UASecurityPolicy;
+        private System.Windows.Forms.Label label9;
     }
 }
 

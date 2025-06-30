@@ -82,6 +82,13 @@ namespace neuserver
 
         private void SessionManagerImpersonateUser(Session session, ImpersonateEventArgs args)
         {
+            // Allow Anonymous login
+            if (args.NewIdentity is AnonymousIdentityToken)
+            {
+                args.Identity = new UserIdentity(args.NewIdentity);
+                Utils.Trace("Anonymous Token Accepted");
+                return;
+            }
             if (args.NewIdentity is UserNameIdentityToken userNameToken)
             {
                 VerifyPassword(userNameToken.UserName, userNameToken.DecryptedPassword);
