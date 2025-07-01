@@ -130,6 +130,9 @@ namespace neuopc
             UAUserTextBox.Text = config.UAUser;
             UAPasswordTextBox.Text = config.UAPassword;
             CheckBox.Checked = config.AutoConnect;
+            UAIsAllowAnonymous.Checked = config.AllowAnonymous;
+            UASecurityPolicy.Text = config.SecurityPolicy;
+            UAMessageMode.Text = config.MessageMode;
 
             if (string.IsNullOrEmpty(UAUrlTextBox.Text))
             {
@@ -374,7 +377,10 @@ namespace neuopc
                 UAUrl = UAUrlTextBox.Text,
                 UAUser = UAUserTextBox.Text,
                 UAPassword = UAPasswordTextBox.Text,
-                AutoConnect = CheckBox.Checked
+                AutoConnect = CheckBox.Checked,
+                AllowAnonymous = UAIsAllowAnonymous.Checked,
+                SecurityPolicy = UASecurityPolicy.Text,
+                MessageMode = UAMessageMode.Text,
             };
 
             ConfigUtil.SaveConfig("neuopc.json", config);

@@ -13,6 +13,9 @@ namespace neuopc
         public string UAUser { get; set; }
         public string UAPassword { get; set; }
         public bool AutoConnect { get; set; }
+        public bool AllowAnonymous { get; set; }
+        public string SecurityPolicy { get; set; }
+        public string MessageMode { get; set; }
     }
 
     public static class ConfigUtil
